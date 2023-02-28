@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,9 +22,9 @@ namespace CodeWars
             };
         }
 
-        //A pangram is a sentence that contains every single letter of the alphabet at least once. For example,
-        //the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
-        //Given a string, detect whether or not it is a pangram.Return True if it is, False if not. Ignore numbers and punctuation.
+        // A pangram is a sentence that contains every single letter of the alphabet at least once. For example,
+        // the sentence "The quick brown fox jumps over the lazy dog" is a pangram, because it uses the letters A-Z at least once (case is irrelevant).
+        // Given a string, detect whether or not it is a pangram.Return True if it is, False if not. Ignore numbers and punctuation.
         public static bool IsPangram(string str)
         {
             var isPangram = false;
@@ -39,6 +40,32 @@ namespace CodeWars
                 }
             }
             return isPangram;
+        }
+
+        // Create a function named divisors/Divisors that takes an integer n > 1 and returns an array with all of the integer's divisors(except for 1 and the number itself),
+        // from smallest to largest. If the number is prime return the string '(integer) is prime' (null in C#)
+        // ex: Kata.Divisors(12) => new int[] {2, 3, 4, 6};
+        //     Kata.Divisors(25) => new int[] {5};
+        //     Kata.Divisors(13) => null;
+        public static int[] Divisors(int n)
+        {
+            var numbers = new List<int>();
+
+            if (n > 1)
+            {
+                for (int i = 1; i <= n; i++)
+                {
+                    if (n % i == 0)
+                    {
+                        if (i > 1 && i < n)
+                        {
+                            numbers.Add(i);
+                        }
+                    }
+                }
+            }
+
+            return numbers.Any() ? numbers.ToArray() : null!;
         }
     }
 }

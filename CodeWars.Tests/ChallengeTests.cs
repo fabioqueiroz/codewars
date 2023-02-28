@@ -81,5 +81,42 @@ namespace CodeWars.Tests
                 result.Should().BeTrue();
             }
         }
+
+        [Test]
+        [TestCase(12)]
+        [TestCase(16)]
+        [TestCase(25)]
+        [TestCase(13)]
+        public void WhenCalled_FindTheDivisors(int number)
+        {
+            // Arrange
+            var case12Result = new int[] { 2, 3, 4, 6 };
+            var case16Result = new int[] { 2, 4, 8 };
+            var case25Result = new int[] { 5 };
+
+            // Act
+            var result = Challenges.Divisors(number);
+
+            // Assert
+            if (number == 12) 
+            {
+                result.Should().BeEquivalentTo(case12Result);
+            }
+
+            if (number == 16)
+            {
+                result.Should().BeEquivalentTo(case16Result);
+            }
+
+            if (number == 25)
+            {
+                result.Should().BeEquivalentTo(case25Result);
+            }
+
+            if (number == 13)
+            {
+                result.Should().BeNull();
+            }
+        }
     }
 }
