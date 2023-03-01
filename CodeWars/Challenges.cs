@@ -99,5 +99,12 @@ namespace CodeWars
         //    return true;
         //}
         #endregion
+
+        // ATM machines allow 4 or 6 digit PIN codes and PIN codes cannot contain anything but exactly 4 digits or exactly 6 digits.
+        public static bool ValidatePin(string pin)
+        {
+            //return Regex.IsMatch(pin, @"^(\d{4}|\d{6})\z");
+            return pin.All(n => char.IsDigit(n)) && (pin.Length == 4 || pin.Length == 6);
+        }
     }
 }

@@ -131,24 +131,38 @@ namespace CodeWars.Tests
             var result = Challenges.IsIsogram(input);
 
             // Assert
-            if (input.Equals("Dermatoglyphics"))
+            if (input.Equals("Dermatoglyphics") || input.Equals(""))
             {
                 result.Should().BeTrue();
             }
-
-            if (input.Equals("moose"))
+            else
             {
                 result.Should().BeFalse();
             }
+        }
 
-            if (input.Equals("aba"))
-            {
-                result.Should().BeFalse();
-            }
+        [Test]
+        [TestCase("1234")]
+        [TestCase("12345")]
+        [TestCase("123456")]
+        [TestCase("a234")]
+        [TestCase("-1234")]
+        [TestCase("1.234")]
+        [TestCase("1234" + "\n")]
+        public void WhenCalled_ShouldValidate_IfPinIsCorrect(string input)
+        {
+            // Arrange
+            // Act
+            var result = Challenges.ValidatePin(input);
 
-            if (input.Equals(""))
+            // Assert
+            if (input.Equals("1234") || input.Equals("123456"))
             {
                 result.Should().BeTrue();
+            }
+            else
+            {
+                result.Should().BeFalse();
             }
         }
     }
