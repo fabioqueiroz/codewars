@@ -106,5 +106,40 @@ namespace CodeWars
             //return Regex.IsMatch(pin, @"^(\d{4}|\d{6})\z");
             return pin.All(n => char.IsDigit(n)) && (pin.Length == 4 || pin.Length == 6);
         }
+
+        // Given the triangle of consecutive odd numbers:
+        //              1
+        //           3     5
+        //        7     9    11
+        //    13    15    17    19
+        // 21    23    25    27    29
+        // ...
+        // Calculate the sum of the numbers in the nth row of this triangle (starting at index 1) e.g.:
+        // 1 -->  1
+        // 2 --> 3 + 5 = 8
+        public static long RowSumOddNumbers(long n)
+        {
+            //var numbers = new List<int>();
+            //var firstNumber = (int)(n * (n - 1)) + 1;
+            //var nextNumber = firstNumber;
+
+            //for (int i = 0; i < n; i++)
+            //{
+            //    if (nextNumber == firstNumber)
+            //    {
+            //        numbers.Add(firstNumber);
+            //    }
+            //    else
+            //    {
+            //        numbers.Add(nextNumber);
+            //    }
+            //    nextNumber += 2;
+            //}
+
+            //return numbers.Sum();
+
+            //return n*n*n;
+            return (long)Math.Pow(n, 3);
+        }
     }
 }

@@ -165,5 +165,36 @@ namespace CodeWars.Tests
                 result.Should().BeFalse();
             }
         }
+
+        [Test]
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        public void WhenCalled_ShouldCalculate_SumOfOddNUmbers(int rowNumber)
+        {
+            // Arrange
+            // Act
+            var result = Challenges.RowSumOddNumbers(rowNumber);
+
+            // Assert
+            switch (rowNumber)
+            {
+                case 1:
+                    result.Should().Be(1);
+                    break;
+                case 2:
+                    result.Should().Be(8);
+                    break;
+                case 3:
+                    result.Should().Be(27);
+                    break;
+                case 4:
+                    result.Should().Be(64);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
