@@ -118,5 +118,38 @@ namespace CodeWars.Tests
                 result.Should().BeNull();
             }
         }
+
+        [Test]
+        [TestCase("Dermatoglyphics")]
+        [TestCase("moose")]
+        [TestCase("aba")]
+        [TestCase("")]
+        public void WhenCalled_ShouldValidate_IfItIsIsogram(string input)
+        {
+            // Arrange
+            // Act
+            var result = Challenges.IsIsogram(input);
+
+            // Assert
+            if (input.Equals("Dermatoglyphics"))
+            {
+                result.Should().BeTrue();
+            }
+
+            if (input.Equals("moose"))
+            {
+                result.Should().BeFalse();
+            }
+
+            if (input.Equals("aba"))
+            {
+                result.Should().BeFalse();
+            }
+
+            if (input.Equals(""))
+            {
+                result.Should().BeTrue();
+            }
+        }
     }
 }

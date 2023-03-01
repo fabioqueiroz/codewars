@@ -42,6 +42,7 @@ namespace CodeWars
             return isPangram;
         }
 
+        #region Divisors
         // Create a function named divisors/Divisors that takes an integer n > 1 and returns an array with all of the integer's divisors(except for 1 and the number itself),
         // from smallest to largest. If the number is prime return the string '(integer) is prime' (null in C#)
         // ex: Kata.Divisors(12) => new int[] {2, 3, 4, 6};
@@ -70,5 +71,33 @@ namespace CodeWars
 
         //    return numbers.Any() ? numbers.ToArray() : null!;
         //}
+        #endregion
+
+        #region Isogram
+        // An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether
+        // a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+        // Example: (Input --> Output)
+        // "Dermatoglyphics" --> true "aba" --> false "moOse" --> false (ignore letter case)
+        public static bool IsIsogram(string str)
+        {
+            var lettersArray = str.ToLower().ToCharArray();
+            return lettersArray.Length == lettersArray.Distinct().Count();
+        }
+
+        //public static bool IsIsogram(string str)
+        //{
+        //    var lettersArray = str.ToLower().ToCharArray();
+        //    Array.Sort(lettersArray);
+
+        //    for (int i = 0; i < str.Length - 1; i++)
+        //    {
+        //        if (lettersArray[i] == lettersArray[i + 1])
+        //        {
+        //            return false;
+        //        }
+        //    }
+        //    return true;
+        //}
+        #endregion
     }
 }
