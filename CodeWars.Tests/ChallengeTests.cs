@@ -50,36 +50,16 @@ namespace CodeWars.Tests
         }
 
         [Test]
-        [TestCase("Negative")]
-        [TestCase("Positive")]
-        public void WhenCalled_ShouldValidate_IfItIsPangram(string input)
+        [TestCase("Negative case #1.", false)]
+        [TestCase("The quick brown fox jumps over the lazy dog.", true)]
+        public void WhenCalled_ShouldValidate_IfItIsPangram(string input, bool isCorrect)
         {
             // Arrange
-            var str = string.Empty;
-
-            if (input.Equals("Negative"))
-            {
-                str = "Negative case #1.";
-            }
-
-            if (input.Equals("Positive"))
-            {
-                str = "The quick brown fox jumps over the lazy dog.";
-            }
-
             // Act
-            var result = Challenges.IsPangram(str);
+            var result = Challenges.IsPangram(input);
 
             // Assert
-            if (input.Equals("Negative"))
-            {
-                result.Should().BeFalse();
-            }
-
-            if (input.Equals("Positive"))
-            {
-                result.Should().BeTrue();
-            }
+            result.Should().Be(isCorrect);
         }
 
         [Test]
@@ -120,81 +100,65 @@ namespace CodeWars.Tests
         }
 
         [Test]
-        [TestCase("Dermatoglyphics")]
-        [TestCase("moose")]
-        [TestCase("aba")]
-        [TestCase("")]
-        public void WhenCalled_ShouldValidate_IfItIsIsogram(string input)
+        [TestCase("Dermatoglyphics", true)]
+        [TestCase("moose", false)]
+        [TestCase("aba", false)]
+        [TestCase("", true)]
+        public void WhenCalled_ShouldValidate_IfItIsIsogram(string input, bool isCorrect)
         {
             // Arrange
             // Act
             var result = Challenges.IsIsogram(input);
 
             // Assert
-            if (input.Equals("Dermatoglyphics") || input.Equals(""))
-            {
-                result.Should().BeTrue();
-            }
-            else
-            {
-                result.Should().BeFalse();
-            }
+            result.Should().Be(isCorrect);
         }
 
         [Test]
-        [TestCase("1234")]
-        [TestCase("12345")]
-        [TestCase("123456")]
-        [TestCase("a234")]
-        [TestCase("-1234")]
-        [TestCase("1.234")]
-        [TestCase("1234" + "\n")]
-        public void WhenCalled_ShouldValidate_IfPinIsCorrect(string input)
+        [TestCase("1234", true)]
+        [TestCase("12345", false)]
+        [TestCase("123456", true)]
+        [TestCase("a234", false)]
+        [TestCase("-1234", false)]
+        [TestCase("1.234", false)]
+        [TestCase("1234" + "\n", false)]
+        public void WhenCalled_ShouldValidate_IfPinIsCorrect(string input, bool isCorrect)
         {
             // Arrange
             // Act
             var result = Challenges.ValidatePin(input);
 
             // Assert
-            if (input.Equals("1234") || input.Equals("123456"))
-            {
-                result.Should().BeTrue();
-            }
-            else
-            {
-                result.Should().BeFalse();
-            }
+            result.Should().Be(isCorrect);
         }
 
         [Test]
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(3)]
-        [TestCase(4)]
-        public void WhenCalled_ShouldCalculate_SumOfOddNUmbers(int rowNumber)
+        [TestCase(1, 1)]
+        [TestCase(2, 8)]
+        [TestCase(3, 27)]
+        [TestCase(4, 64)]
+        public void WhenCalled_ShouldCalculate_SumOfOddNUmbers(int rowNumber, int total)
         {
             // Arrange
             // Act
             var result = Challenges.RowSumOddNumbers(rowNumber);
 
             // Assert
-            switch (rowNumber)
-            {
-                case 1:
-                    result.Should().Be(1);
-                    break;
-                case 2:
-                    result.Should().Be(8);
-                    break;
-                case 3:
-                    result.Should().Be(27);
-                    break;
-                case 4:
-                    result.Should().Be(64);
-                    break;
-                default:
-                    break;
-            }
+            result.Should().Be(total); 
+        }
+
+        [Test]
+        [TestCase(1500, 5, 100, 5000, 15)]
+        [TestCase(1500000, 2.5, 10000, 2000000, 10)]
+        [TestCase(1500000, 0.25, 1000, 2000000, 94)]
+        public void WhenCalled_ShouldCalculate_PopulationGrowth(int p0, double percent, int aug, int p, int years)
+        {
+            // Arrange
+            // Act
+            var result = Challenges.NbYear(p0, percent, aug, p);
+
+            // Assert
+            result.Should().Be(years);
         }
     }
 }
