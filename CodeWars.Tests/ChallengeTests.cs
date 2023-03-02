@@ -160,5 +160,18 @@ namespace CodeWars.Tests
             // Assert
             result.Should().Be(years);
         }
+
+        [Test]
+        public void WhenCalled_ShouldCreatePhoneNumber()
+        {
+            // Arrange
+            var numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+
+            // Act
+            var result = Challenges.CreatePhoneNumber(numbers);
+
+            // Assert
+            result.Should().Be("(123) 456-7890");
+        }
     }
 }
