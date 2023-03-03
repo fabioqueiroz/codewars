@@ -33,5 +33,20 @@ namespace CodeWars
         {
             return input.Where(c => char.IsDigit(c)).Select(c => (int)char.GetNumericValue(c)).Sum();
         }
+
+        // Given a string, write a method that returns new string in which every odd letter of the word is uppercase.
+        // String may consist of one or more words.
+        public static string MakeUppercase(string input) 
+        {
+            //var result = new StringBuilder();
+            //for (int i = 0; i < input.Length; i++)
+            //{
+            //    _ = (i % 2 == 0) ? result.Append(char.ToUpper(input[i])) : result.Append(input[i]);
+            //}
+            //return result.ToString();
+
+            return string.Concat(input.Select((c, index) => index % 2 == 0 ? char.ToUpper(c) : c));
+
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace CodeWars.Tests
         [Test]
         [TestCase("ABCD", "^", "A^B^C^D")]
         [TestCase("chocolate", "-", "c-h-o-c-o-l-a-t-e")]
-        public void WhenCalled_ShouldAddSeparatorSuccessfully(string input, string separator, string output)
+        public void WhenCalled_ShouldAddSeparator(string input, string separator, string output)
         {
             // Arrange
             // Act
@@ -27,7 +27,7 @@ namespace CodeWars.Tests
         [Test]
         [TestCase("qwerty", "ytrewq")]
         [TestCase("oe93 kr", "rk 39eo")]
-        public void WhenCalled_ShouldReverseOrderSuccessfully(string input, string output)
+        public void WhenCalled_ShouldReverseOrder(string input, string output)
         {
             // Arrange
             // Act
@@ -41,11 +41,25 @@ namespace CodeWars.Tests
         [TestCase("1q2w3e", 6)]
         [TestCase("L0r3m.1p5um", 9)]
         [TestCase("", 0)]
-        public void WhenCalled_ShouldFindSumOfDigitsSuccessfully(string input, int output)
+        public void WhenCalled_ShouldFindSumOfDigits(string input, int output)
         {
             // Arrange
             // Act
             var result = Exercises.FindSumOfDigits(input);
+
+            // Assert
+            result.Should().Be(output);
+        }
+
+        [Test]
+        [TestCase("modem", "MoDeM")]
+        [TestCase("BookWorm", "BoOkWoRm")]
+        [TestCase("Aliquam dolor nisl?", "AlIqUaM DoLoR NiSl?")]
+        public void WhenCalled_ShouldMakeUppercase(string input, string output)
+        {
+            // Arrange
+            // Act
+            var result = Exercises.MakeUppercase(input);
 
             // Assert
             result.Should().Be(output);
