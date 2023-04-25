@@ -192,5 +192,16 @@ namespace CodeWars
             //return $"({numbers[0]}{numbers[1]}{numbers[2]})" + " " + $"{numbers[3]}{numbers[4]}{numbers[5]}-{numbers[6]}{numbers[7]}{numbers[8]}{numbers[9]}";
             return int.Parse(string.Concat(numbers)).ToString("(000) 000-0000");
         }
+
+        // Complete the square sum function so that it squares each number passed into it and then sums the results together.
+        // For example, for [1, 2, 2] it should return 9 because 1^2 + 2^2 + 2^2 = 9
+        //public static int SquareSum(int[] numbers) 
+        //    => numbers.Sum(n => n * n);
+        public static int SquareSum(int[] numbers)
+            => numbers.Aggregate(0, (total, number) => total += (int)Math.Pow(number, 2));
+
+        // Convert string to number
+        public static int StringToNumber(string str) 
+            => int.Parse(str);
     }
 }

@@ -173,5 +173,35 @@ namespace CodeWars.Tests
             // Assert
             result.Should().Be("(123) 456-7890");
         }
+
+        [Test]
+        [TestCase(1, 2, 2, 9)]
+        [TestCase(1, 2, 0, 5)]
+        [TestCase(5, 3, 4, 50)]
+        [TestCase(0, 0, 0, 0)]
+        public void WhenCalled_ShouldCalculateSquareSum(int x, int y, int z, int total)
+        {
+            // Arrange
+            var numbers = new int[] { x, y, z };
+
+            // Act
+            var result = Challenges.SquareSum(numbers);
+
+            // Assert
+            result.Should().Be(total);
+        }
+
+        [Test]
+        [TestCase("1234", 1234)]
+        [TestCase("-7", -7)]
+        public void WhenCalled_ShouldConvertStringToNumbers(string str, int number)
+        {
+            // Arrange
+            // Act
+            var result = Challenges.StringToNumber(str);
+
+            // Assert
+            result.Should().Be(number);
+        }
     }
 }
