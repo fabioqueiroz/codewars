@@ -1,9 +1,9 @@
 using Bogus;
 using FluentAssertions;
-using System.Runtime.CompilerServices;
 
 namespace CodeWars.Tests
 {
+    [TestOf(nameof(Challenges))]
     public class ChallengeTests
     {
         private static readonly Randomizer _randomizer = new();
