@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,28 @@ namespace CodeWars.Tests
 
             // Assert
             result.Should().Be(output);
+        }
+
+        [Test]
+        [TestCaseSource(nameof(MaxNoOfCandies))]
+        public void WhenCalled_ShouldReturntrueForMaxNumber(int[] candies, int extraCandies, bool[] output)
+        {
+            // Arrange
+            // Act
+            var result = LeetCodeChallenges.KidsWithCandies(candies, extraCandies);
+
+            // Assert
+            result.Should().BeEquivalentTo(output);
+        }
+
+        private static IEnumerable MaxNoOfCandies
+        {
+            get
+            {
+                yield return new TestCaseData(new int[] { 2, 3, 5, 1, 3 }, 3, new bool[] { true, true, true, false, true });
+                yield return new TestCaseData(new int[] { 4, 2, 1, 1, 2 }, 1, new bool[] { true, false, false, false, false });
+                yield return new TestCaseData(new int[] { 12, 1, 12 }, 10, new bool[] { true, false, true });
+            }
         }
     }
 }

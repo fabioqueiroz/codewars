@@ -70,6 +70,29 @@ namespace CodeWars
             return GetOutput(str1, str2);
         }
 
+        // There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has,
+        // and an integer extraCandies, denoting the number of extra candies that you have.
+        // Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies,
+        // they will have the greatest number of candies among all the kids, or false otherwise.
+        // Note that multiple kids can have the greatest number of candies.
+        public static IList<bool> KidsWithCandies(int[] candies, int extraCandies)
+        {
+            ValidateCandiesInput(candies, extraCandies);
+
+            var maxNumber = candies.Max();
+            var result = new List<bool>();
+
+            foreach (var candy in candies)
+            {
+                var currentAmount = candy + extraCandies;
+                var hasGreatestNumber = (currentAmount >= maxNumber) ? true : false;
+                result.Add(hasGreatestNumber);
+            }
+
+            ValidateCandiesResult(candies, result.ToArray());
+
+            return result;
+        }
 
         private static int CalculateGCD(int a, int b)
         {
@@ -123,6 +146,35 @@ namespace CodeWars
                 {
                     throw new Exception($"Invalid length for {nameof(word)}.");
                 }
+            }
+        }
+
+        private static void ValidateCandiesInput(int[] candies, int extraCandies)
+        {
+            if (!candies.Any())
+            {
+                throw new Exception("Empty candies list.");
+            }
+
+            foreach (var candy in candies)
+            {
+                if (candy < 1 || candy > 100)
+                {
+                    throw new Exception("The max number of candies per child should be between 1 and 100.");
+                }
+            }
+
+            if (extraCandies < 1 || extraCandies > 50)
+            {
+                throw new Exception($"Invalid number of extra candies: {extraCandies}.");
+            }
+        }
+
+        private static void ValidateCandiesResult(int[] candies, bool[] result)
+        {
+            if (candies.Length != result.Length || (result.Length < 2 || result.Length > 100))
+            {
+                throw new Exception("The length of the result list is invalid.");
             }
         }
     }
