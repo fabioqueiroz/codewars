@@ -94,6 +94,61 @@ namespace CodeWars
             return result;
         }
 
+        // You have a long flowerbed in which some of the plots are planted, and some are not. However, flowers cannot be planted in adjacent plots.
+        // Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n,
+        // return true if n new flowers can be planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.
+        public static bool CanPlaceFlowers(int[] flowerbed, int n)
+        {
+            ValidateFlowerbedInput(flowerbed, n);
+
+            if (n == 0 || n == 1 && flowerbed.All(x => x == 0))
+            {
+                return true;
+            }
+
+            var emptyPlotAtStart = new int[] { 0, 0, 1 };
+            var emptyPlot = new int[] { 0, 0, 0 };
+            var emptyPlotAtEnd = new int[] { 1, 0, 0 };
+            var sequencesFound = new List<bool>();
+
+            if (flowerbed.SequenceEqual(emptyPlot) && n <= 2)
+            {
+                return true;
+            }
+
+            for (int i = 0; i <= flowerbed.Length - emptyPlot.Length; i++)
+            {
+                var test = flowerbed.Skip(i).Take(emptyPlot.Length).ToList();
+
+                if (i == 0 && (flowerbed.Skip(i).Take(emptyPlotAtStart.Length).SequenceEqual(emptyPlotAtStart)
+                    || flowerbed.Skip(i).Take(emptyPlot.Length).SequenceEqual(emptyPlot)))
+                {
+                    sequencesFound.Add(true);
+                    flowerbed.SetValue(1, i);
+                }
+
+                else if (flowerbed.Skip(i).Take(emptyPlot.Length).SequenceEqual(emptyPlot))
+                {
+                    sequencesFound.Add(true);
+                    flowerbed.SetValue(1, i + 1);
+                }
+
+                else if (i == flowerbed.Length - 3 && flowerbed.Skip(i).Take(emptyPlotAtEnd.Length).SequenceEqual(emptyPlotAtEnd))
+                {
+                    sequencesFound.Add(true);
+                    flowerbed.SetValue(1, flowerbed.Length - 1);
+                }
+            }
+
+            if (HasAdjacentFlowers(flowerbed) ||
+                sequencesFound.Any() && sequencesFound.Count(x => x) < n)
+            {
+                return false;
+            }
+
+            return sequencesFound.Any();
+        }
+
         private static int CalculateGCD(int a, int b)
         {
             while (a != 0 && b != 0)
@@ -176,6 +231,39 @@ namespace CodeWars
             {
                 throw new Exception("The length of the result list is invalid.");
             }
+        }
+
+        private static void ValidateFlowerbedInput(int[] flowerbed, int n)
+        {
+            if (flowerbed.Length == 0 || flowerbed is { Length: < 1 or > 20000 })
+            {
+                throw new Exception("The length of the flowerbed is invalid.");
+            }
+
+            if (!flowerbed.Any(x => x == 0 || x == 1))
+            {
+                throw new Exception("The collection should contain only 0 or 1.");
+            }
+
+            if (n < 0 || n > flowerbed.Length)
+            {
+                throw new Exception($"Invalid value of n: {n}.");
+            }
+        }
+
+        private static bool HasAdjacentFlowers(int[] flowerbed)
+        {
+            var adjacentFlowers = new int[] { 1, 1 };
+
+            for (int i = 0; i <= flowerbed.Length - adjacentFlowers.Length; i++)
+            {
+                if (flowerbed.Skip(i).Take(adjacentFlowers.Length).SequenceEqual(adjacentFlowers))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

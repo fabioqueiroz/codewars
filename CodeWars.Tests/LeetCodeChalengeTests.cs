@@ -56,6 +56,18 @@ namespace CodeWars.Tests
             // Assert
             result.Should().BeEquivalentTo(output);
         }
+        
+        [Test]
+        [TestCaseSource(nameof(FlowerBeds))]
+        public void WhenCalled_ShouldEnsureCanPlaceFlowers(int[] flowerbed, int n, bool output)
+        {
+            // Arrange
+            // Act
+            var result = LeetCodeChallenges.CanPlaceFlowers(flowerbed, n);
+
+            // Assert
+            result.Should().Be(output);
+        }
 
         private static IEnumerable MaxNoOfCandies
         {
@@ -64,6 +76,28 @@ namespace CodeWars.Tests
                 yield return new TestCaseData(new int[] { 2, 3, 5, 1, 3 }, 3, new bool[] { true, true, true, false, true });
                 yield return new TestCaseData(new int[] { 4, 2, 1, 1, 2 }, 1, new bool[] { true, false, false, false, false });
                 yield return new TestCaseData(new int[] { 12, 1, 12 }, 10, new bool[] { true, false, true });
+            }
+        }
+
+        private static IEnumerable FlowerBeds
+        {
+            get
+            {
+                yield return new TestCaseData(new int[] { 1, 0, 0, 0, 1 }, 1, true);
+                yield return new TestCaseData(new int[] { 1, 0, 0, 0, 1 }, 2, false);
+                yield return new TestCaseData(new int[] { 0, 0, 0, 1, 0 }, 1, true);
+                yield return new TestCaseData(new int[] { 1, 0, 0, 0, 1, 0, 0, 0, 1 }, 2, true);
+                yield return new TestCaseData(new int[] { 1, 1, 0, 0, 1 }, 1, false);
+                yield return new TestCaseData(new int[] { 1, 0, 0, 0, 0, 1 }, 2, false);
+                yield return new TestCaseData(new int[] { 1, 0, 0, 0, 0, 0, 1 }, 2, true);
+                yield return new TestCaseData(new int[] { 1, 0, 1, 0, 1, 0, 1 }, 0, true);
+                yield return new TestCaseData(new int[] { 0, 0, 1, 0, 1 }, 1, true);
+                yield return new TestCaseData(new int[] { 1, 0, 0, 0, 1, 0, 0 }, 2, true);
+                yield return new TestCaseData(new int[] { 0 }, 1, true);
+                yield return new TestCaseData(new int[] { 0, 0, 0, 0, 1 }, 2, true);
+                yield return new TestCaseData(new int[] { 0, 0 }, 1, true);
+                yield return new TestCaseData(new int[] { 0, 0, 0, 0 }, 3, false);
+                yield return new TestCaseData(new int[] { 0, 0, 0 }, 2, true);
             }
         }
     }
